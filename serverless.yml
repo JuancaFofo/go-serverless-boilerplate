@@ -1,0 +1,24 @@
+service: jufo-gifts-backend
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: dev
+  region: us-east-1
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+# Endpoint config
+functions:
+  Hello:
+    handler: bin/hello
+    events:
+      - http:
+          path: /hello
+          method: get
+          cors: true

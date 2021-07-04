@@ -1,0 +1,2 @@
+format-all:
+	gofmt -w .
