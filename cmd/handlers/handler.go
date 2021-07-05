@@ -7,7 +7,6 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
-	"github.com/juank11memphis/jufo-gifts-backend/internal/components/hello"
 	"github.com/juank11memphis/jufo-gifts-backend/internal/core/routing"
 )
 
@@ -17,7 +16,8 @@ func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.API
 	if ginLambda == nil {
 		log.Printf("Jufo gifts backend cold start...")
 		engine := routing.Build()
-		routing.AddRoute(engine, hello.Path, hello.Method, hello.ProcessRequest)
+		routing.AddGraphqlRouter(engine)
+
 		ginLambda = ginadapter.New(engine)
 	}
 

@@ -23,6 +23,6 @@ functions:
     handler: bin/main
     events:
       - http:
-          path: /hello
-          method: get
+          path: /graphql
+          method: post
           cors: true

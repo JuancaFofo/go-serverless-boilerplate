@@ -4,6 +4,9 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/graph-gophers/graphql-go"
+	"github.com/graph-gophers/graphql-go/relay"
+	coregraphql "github.com/juank11memphis/jufo-gifts-backend/internal/core/graphql"
 )
 
 const (
@@ -17,6 +20,16 @@ func Build() *gin.Engine {
 	engine.Use(gin.Recovery())
 	engine.Use(CORS())
 	return engine
+}
+
+type query struct{}
+
+func (_ *query) Hello() string { return "Hello, world!" }
+
+func AddGraphqlRouter(engine *gin.Engine) {
+	group := engine.Group("/")
+	schema := graphql.MustParseSchema(coregraphql.AppSchema, &query{})
+	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: schema}))
 }
 
 func setMethodHandler(method string, path string, fn gin.HandlerFunc, group *gin.RouterGroup) {
