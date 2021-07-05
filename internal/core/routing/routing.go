@@ -3,8 +3,6 @@ package routing
 import (
 	"os"
 
-	"github.com/aws/aws-lambda-go/events"
-	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
 	"github.com/gin-gonic/gin"
 )
 
@@ -34,14 +32,6 @@ func AddRoute(engine *gin.Engine, path string, method string, fn gin.HandlerFunc
 	group := engine.Group("/")
 	setMethodHandler(method, path, fn, group)
 	return engine
-}
-
-func CreateLambdaEntrypoint(engine *gin.Engine, path string, method string, fn gin.HandlerFunc) interface{} {
-	return func(req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-		ginEngine := AddRoute(engine, path, method, fn)
-		ginLambda := ginadapter.New(ginEngine)
-		return ginLambda.Proxy(req)
-	}
 }
 
 func CORS() gin.HandlerFunc {

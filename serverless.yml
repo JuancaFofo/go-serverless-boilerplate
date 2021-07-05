@@ -1,11 +1,14 @@
 service: jufo-gifts-backend
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
   runtime: go1.x
   stage: dev
   region: us-east-1
+
+custom:
+  myStage: ${opt:stage, self:provider:stage}
 
 package:
   exclude:
@@ -15,8 +18,9 @@ package:
 
 # Endpoint config
 functions:
-  Hello:
-    handler: bin/hello
+  jufoGiftsBackend:
+    name: jufo-gifts-backend-${self:custom.myStage}
+    handler: bin/main
     events:
       - http:
           path: /hello
