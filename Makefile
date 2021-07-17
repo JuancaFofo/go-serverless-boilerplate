@@ -9,5 +9,7 @@ build:
 	go build -ldflags="-s -w" -mod=mod -o bin/main cmd/handlers/handler.go
 
 deploy-dev: build
-	npm install -g serverless
 	sls deploy --stage dev --verbose
+
+destroy-dev:
+	sls remove --stage dev --verbose

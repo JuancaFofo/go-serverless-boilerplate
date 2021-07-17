@@ -1,4 +1,4 @@
-module github.com/juank11memphis/jufo-gifts-backend
+module github.com/juank11memphis/go-serverless-boilerplate
 
 go 1.16
 

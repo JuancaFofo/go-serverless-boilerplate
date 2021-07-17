@@ -1,25 +1,22 @@
-service: jufo-gifts-backend
+service: golan-serverless-backend
 frameworkVersion: "2"
+variablesResolutionMode: 20210326
 
 provider:
   name: aws
   runtime: go1.x
-  stage: dev
   region: us-east-1
-
-custom:
-  myStage: ${opt:stage, self:provider:stage}
+  lambdaHashingVersion: "20201221"
 
 package:
-  exclude:
-    - ./**
-  include:
-    - ./bin/**
+  patterns:
+    - '!./**'
+    - './bin/**'
 
 # Endpoint config
 functions:
-  jufoGiftsBackend:
-    name: jufo-gifts-backend-${self:custom.myStage}
+  golangServerlessBackend:
+    name: golang-serverless-backend-${sls:stage}
     handler: bin/main
     events:
       - http:

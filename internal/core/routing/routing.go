@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	coregraphql "github.com/juank11memphis/jufo-gifts-backend/internal/core/graphql"
+	"github.com/juank11memphis/go-serverless-boilerplate/internal/core/graphql"
 )
 
 const (
@@ -24,7 +24,7 @@ func Build() *gin.Engine {
 
 type query struct{}
 
-func (_ *query) Hello() string { return "Hello, world!" }
+func (_ *query) Hello() string { return "Hello Golang Serverless!!!" }
 
 func AddGraphqlRouter(engine *gin.Engine) {
 	group := engine.Group("/")

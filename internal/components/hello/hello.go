@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/juank11memphis/jufo-gifts-backend/internal/core/routing"
+	"github.com/juank11memphis/go-serverless-boilerplate/internal/core/routing"
 )
 
 const Path = "/hello"

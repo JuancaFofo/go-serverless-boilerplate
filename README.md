@@ -1,11 +1,6 @@
-# jufo-gifts-backend
+# go-serverless-boilerplate
 
-## Useful documentation
+## How to deploy
 
-1. Golang + Graphql + Lambda: http://andrewdunstall.com/2020/10/23/graphql-api-in-golang-with-aws-lambda/
-
-2. Golang + Graphql Library: https://github.com/graph-gophers/graphql-go
-3. Gophers Example: https://github.com/tonyghita/graphql-go-example
-
-4. Golang + Graphql Library: https://github.com/99designs/gqlgen
-5. gqlgen example: https://www.agiliq.com/blog/2020/04/graphql-api-server-using-golang-gin-framework/
+1. Install serverless by running `npm insta1ll -g serverless`
+2. Run `make deploy-dev` or `make deploy-prod` depending on what environment you wish to deploy
