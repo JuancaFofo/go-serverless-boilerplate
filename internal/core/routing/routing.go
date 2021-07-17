@@ -4,9 +4,8 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	"github.com/juank11memphis/go-serverless-boilerplate/internal/core/graphql"
+	coregraphql "github.com/juank11memphis/go-serverless-boilerplate/internal/core/graphql"
 )
 
 const (
@@ -22,29 +21,9 @@ func Build() *gin.Engine {
 	return engine
 }
 
-type query struct{}
-
-func (_ *query) Hello() string { return "Hello Golang Serverless!!!" }
-
 func AddGraphqlRouter(engine *gin.Engine) {
 	group := engine.Group("/")
-	schema := graphql.MustParseSchema(coregraphql.AppSchema, &query{})
-	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: schema}))
-}
-
-func setMethodHandler(method string, path string, fn gin.HandlerFunc, group *gin.RouterGroup) {
-	switch method {
-	case POST:
-		group.POST(path, fn)
-	case GET:
-		group.GET(path, fn)
-	}
-}
-
-func AddRoute(engine *gin.Engine, path string, method string, fn gin.HandlerFunc) *gin.Engine {
-	group := engine.Group("/")
-	setMethodHandler(method, path, fn, group)
-	return engine
+	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: coregraphql.CreateSchema()}))
 }
 
 func CORS() gin.HandlerFunc {

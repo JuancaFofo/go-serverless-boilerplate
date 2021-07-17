@@ -14,3 +14,6 @@ bin
 
 # Serverless framework stuff
 .serverless
+
+# IDE files
+.idea
