@@ -23,7 +23,8 @@ func Build() *gin.Engine {
 
 func AddGraphqlRouter(engine *gin.Engine) {
 	group := engine.Group("/")
-	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: coregraphql.CreateSchema()}))
+	graphqlSchema := coregraphql.CreateSchema()
+	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: graphqlSchema}))
 }
 
 func CORS() gin.HandlerFunc {

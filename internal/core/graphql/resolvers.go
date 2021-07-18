@@ -2,7 +2,7 @@ package coregraphql
 
 import "github.com/juank11memphis/go-serverless-boilerplate/internal/components/hello"
 
-type Resolvers struct{
+type Resolvers struct {
 	HelloResolver *hello.HelloResolver
 }
 
