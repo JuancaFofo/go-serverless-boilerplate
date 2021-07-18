@@ -26,6 +26,7 @@
 │           └── routing.go
 ├── .editorconfig
 ├── .gitignore
+├── docker-compose.yml (local postgres database)
 ├── go.mod
 ├── go.sum
 ├── Makefile
@@ -41,7 +42,9 @@
 
 ## How to run locally
 
-TBD
+### Starting local postgres database
+
+1. Run `make setup-local-db`
 
 ## How to run unit tests
 

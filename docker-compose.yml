@@ -1,0 +1,20 @@
+version: "3.7"
+networks:
+  goserverless:
+    external:
+      name: goserverless
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    restart: unless-stopped
+    networks:
+      - goserverless
+    ports:
+      - 5432:5432
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=goserverless
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
