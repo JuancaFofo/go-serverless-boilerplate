@@ -22,11 +22,14 @@ destroy-prod:
 	sls remove --stage prod --verbose
 
 # ----------------------------
-# SETTING UP LOCAL DATABASE
+# RUNNING LOCALLY
 # ----------------------------
 
+local: setup-local-db
+	gow -i=./data/db -c run -mod=mod cmd/local/main.go
+
 setup-local-db: docker-compose-down init
-	docker-compose up --build postgres
+	docker-compose up --detach --build postgres
 
 # ----------------------------
 # DOCKER

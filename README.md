@@ -42,9 +42,14 @@
 
 ## How to run locally
 
-### Starting local postgres database
+### Pre-requisites
 
-1. Run `make setup-local-db`
+1. Install docker
+2. Install `gow`: https://github.com/mitranim/gow. We use this to locally run the app in watch mode.
+
+### Starting the app locally
+
+1. Run `make local`. This will start a local postgres db and run the app locally on watch mode
 
 ## How to run unit tests
 
