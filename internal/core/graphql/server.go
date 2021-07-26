@@ -1,11 +1,11 @@
-package routing
+package coregraphql
 
 import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
-	coregraphql "github.com/juank11memphis/go-serverless-boilerplate/internal/core/graphql"
 )
 
 const (
@@ -13,21 +13,31 @@ const (
 	POST = "post"
 )
 
-func Build() *gin.Engine {
+func BuildGinEngine() *gin.Engine {
 	engine := gin.New()
 	engine.Use(gin.Logger())
 	engine.Use(gin.Recovery())
-	engine.Use(CORS())
+	engine.Use(cors())
 	return engine
 }
 
-func AddGraphqlRouter(engine *gin.Engine) {
-	group := engine.Group("/")
-	graphqlSchema := coregraphql.CreateSchema()
-	group.POST("graphql", gin.WrapH(&relay.Handler{Schema: graphqlSchema}))
+func SetupServer(ginEngine *gin.Engine, resolvers *Resolvers) {
+	addGraphqlRouter(ginEngine, resolvers)
 }
 
-func CORS() gin.HandlerFunc {
+func addGraphqlRouter(ginEngine *gin.Engine, resolvers *Resolvers) {
+	group := ginEngine.Group("/")
+	graphqlSchema := CreateSchema(resolvers)
+	group.POST("graphql", gin.WrapH(&relay.Handler{
+		Schema: graphqlSchema,
+	}))
+}
+
+func CreateSchema(resolvers *Resolvers) *graphql.Schema {
+	return graphql.MustParseSchema(AppSchema, resolvers)
+}
+
+func cors() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		allowedOrigin := os.Getenv("ALLOWED_ORIGIN")
 		c.Writer.Header().Set("Access-Control-Allow-Origin", allowedOrigin)
