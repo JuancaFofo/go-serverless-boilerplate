@@ -17,13 +17,18 @@
 ├── internal (Application code)
 │   ├── components (app feature components)
 │   │   └── hello
-│   │      └── hello.resolvers.go
+│   │      │── hello.dao.go
+│   │      │── hello.resolvers.go
+│   │      └── hello.service.go
 │   └── core (app core components)
-│       │── graphql (graphql setup)
-│       │   │── resolvers.go
-│       │   └── schema.go
-│       └── routing (gin setup)
-│           └── routing.go
+│       │── container (DI container)
+│       │   └── container.go
+│       │── database (database connection)
+│       │   └── database.go
+│       └── graphql (graphql setup)
+│           │── resolvers.go
+│           │── schema.go
+│           └── server.go
 ├── .editorconfig
 ├── .gitignore
 ├── docker-compose.yml (local postgres database)

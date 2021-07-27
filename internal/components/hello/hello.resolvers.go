@@ -11,6 +11,5 @@ func NewHelloResolver(service *HelloService) *HelloResolver {
 }
 
 func (r *HelloResolver) SayHello() string {
-	// container.DBOrm.Create(&todo.TodoItem{Description: "test1", Completed: false})
 	return r.service.SayHello()
 }
