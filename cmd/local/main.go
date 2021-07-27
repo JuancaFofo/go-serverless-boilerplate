@@ -11,12 +11,12 @@ import (
 func main() {
 	log.Println("Locally running....")
 
-	_, err := coredatabase.Connect()
+	db, err := coredatabase.Connect()
 	if err != nil {
 		log.Fatal("Unexpected error connecting to local database", err)
 		panic(err)
 	}
 	ginEngine := coregraphql.BuildGinEngine()
-	corecontainer.StartAppContainer(ginEngine)
+	corecontainer.StartAppContainer(ginEngine, db)
 	ginEngine.Run()
 }

@@ -34,7 +34,8 @@ func addGraphqlRouter(ginEngine *gin.Engine, resolvers *Resolvers) {
 }
 
 func CreateSchema(resolvers *Resolvers) *graphql.Schema {
-	return graphql.MustParseSchema(AppSchema, resolvers)
+	opts := []graphql.SchemaOpt{graphql.UseFieldResolvers()}
+	return graphql.MustParseSchema(AppSchema, resolvers, opts...)
 }
 
 func cors() gin.HandlerFunc {
