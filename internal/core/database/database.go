@@ -1,17 +1,27 @@
 package coredatabase
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/juank11memphis/go-serverless-boilerplate/internal/components/todo"
+	coreconfig "github.com/juank11memphis/go-serverless-boilerplate/internal/core/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-func Connect() (*gorm.DB, error) {
-	// TODO implement .env files support for local dev
-	// TODO create Config utility to read config values from environment
-	dsn := "host=localhost user=postgres password=postgres dbname=goserverless port=5432 sslmode=disable"
+const (
+	host     = "DB_HOST"
+	userName = "DB_USERNAME"
+	password = "DB_PASSWORD"
+	database = "DB_DATABASE"
+)
+
+func Connect(c *coreconfig.Config) (*gorm.DB, error) {
+	propertyMap := c.GetValuesMapString(host, userName, password, database)
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=5432 sslmode=disable",
+		propertyMap[host], propertyMap[userName], propertyMap[password], propertyMap[database])
+
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
@@ -21,7 +31,6 @@ func Connect() (*gorm.DB, error) {
 	db.AutoMigrate(&todo.TodoItem{})
 
 	// TODO add the db host on this log
-	log.Println("Successfully connected to the postgres database...")
+	log.Printf("Successfully connected to postgres DB at host %s\n", host)
 	return db, nil
 }
-

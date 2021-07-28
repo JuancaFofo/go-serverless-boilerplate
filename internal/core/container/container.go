@@ -6,20 +6,23 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/juank11memphis/go-serverless-boilerplate/internal/components/hello"
 	"github.com/juank11memphis/go-serverless-boilerplate/internal/components/todo"
+	coreconfig "github.com/juank11memphis/go-serverless-boilerplate/internal/core/config"
+	coredatabase "github.com/juank11memphis/go-serverless-boilerplate/internal/core/database"
 	coregraphql "github.com/juank11memphis/go-serverless-boilerplate/internal/core/graphql"
 	"go.uber.org/fx"
-	"gorm.io/gorm"
 )
 
-func StartAppContainer(ginEngine *gin.Engine, db *gorm.DB) {
+func StartAppContainer(ginEngine *gin.Engine) {
 	fx.New(
 		fx.Provide(
-			func () *gorm.DB {
-				return db
-			},
-			func () *gin.Engine {
+			// func() *gorm.DB {
+			// 	return db
+			// },
+			func() *gin.Engine {
 				return ginEngine
 			},
+			coreconfig.NewConfig,
+			coredatabase.Connect,
 			hello.NewHelloResolver,
 			hello.NewHelloService,
 			hello.NewHelloDao,
