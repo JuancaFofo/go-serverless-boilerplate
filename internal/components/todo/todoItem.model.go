@@ -1,4 +1,4 @@
-package todo
+package todo_comp
 
 import "gorm.io/gorm"
 
@@ -12,6 +12,7 @@ type TodoItem struct {
 	Description string
 	Completed   bool
 }
-func(t *TodoItem) Id() int32 {
+
+func (t *TodoItem) Id() int32 {
 	return int32(t.ID)
 }

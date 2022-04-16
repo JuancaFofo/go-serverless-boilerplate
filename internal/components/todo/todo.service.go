@@ -1,4 +1,4 @@
-package todo
+package todo_comp
 
 type TodoService struct {
 	dao *TodoDao
@@ -10,6 +10,6 @@ func NewTodoService(dao *TodoDao) *TodoService {
 	}
 }
 
-func(s *TodoService) AddTodo(todoItem *TodoItem) *TodoItem {
+func (s *TodoService) AddTodo(todoItem *TodoItem) *TodoItem {
 	return s.dao.AddTodo(todoItem)
 }

@@ -1,6 +1,6 @@
-package todo
+package todo_comp
 
-type TodoResolver struct{
+type TodoResolver struct {
 	service *TodoService
 }
 
@@ -10,6 +10,6 @@ func NewTodoResolver(service *TodoService) *TodoResolver {
 	}
 }
 
-func(r *TodoResolver) AddTodo(todoItem *TodoItem) *TodoItem {
+func (r *TodoResolver) AddTodo(todoItem *TodoItem) *TodoItem {
 	return r.service.AddTodo(todoItem)
 }

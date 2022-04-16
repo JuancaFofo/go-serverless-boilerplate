@@ -1,4 +1,4 @@
-package todo
+package todo_comp
 
 import "gorm.io/gorm"
 
@@ -12,7 +12,7 @@ func NewTodoDao(db *gorm.DB) *TodoDao {
 	}
 }
 
-func(d *TodoDao) AddTodo(todoItem *TodoItem) *TodoItem {
+func (d *TodoDao) AddTodo(todoItem *TodoItem) *TodoItem {
 	// TODO handle gorm errors
 	d.db.Create(todoItem)
 	return todoItem

@@ -1,6 +1,6 @@
-package hello
+package hello_comp
 
-type HelloResolver struct{
+type HelloResolver struct {
 	service *HelloService
 }
 

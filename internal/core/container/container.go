@@ -14,18 +14,18 @@ import (
 func StartAppContainer(ginEngine *gin.Engine, db *gorm.DB) {
 	fx.New(
 		fx.Provide(
-			func () *gorm.DB {
+			func() *gorm.DB {
 				return db
 			},
-			func () *gin.Engine {
+			func() *gin.Engine {
 				return ginEngine
 			},
-			hello.NewHelloResolver,
-			hello.NewHelloService,
-			hello.NewHelloDao,
-			todo.NewTodoDao,
-			todo.NewTodoService,
-			todo.NewTodoResolver,
+			hello_comp.NewHelloResolver,
+			hello_comp.NewHelloService,
+			hello_comp.NewHelloDao,
+			todo_comp.NewTodoDao,
+			todo_comp.NewTodoService,
+			todo_comp.NewTodoResolver,
 			coregraphql.NewResolvers,
 		),
 		fx.Invoke(coregraphql.SetupServer),

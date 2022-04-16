@@ -1,4 +1,4 @@
-package hello
+package hello_comp
 
 type HelloService struct {
 	dao *HelloDao
@@ -10,6 +10,6 @@ func NewHelloService(dao *HelloDao) *HelloService {
 	}
 }
 
-func(s *HelloService) SayHello() string {
+func (s *HelloService) SayHello() string {
 	return s.dao.SayHello()
 }

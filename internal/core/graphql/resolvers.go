@@ -1,7 +1,7 @@
 package coregraphql
 
 import (
-	"github.com/juank11memphis/go-serverless-boilerplate/internal/components/hello"
+	hello_comp "github.com/juank11memphis/go-serverless-boilerplate/internal/components/hello"
 	"github.com/juank11memphis/go-serverless-boilerplate/internal/components/todo"
 	"go.uber.org/fx"
 )
@@ -9,8 +9,8 @@ import (
 type AllResolvers struct {
 	fx.In
 
-	HelloResolver *hello.HelloResolver
-	TodoResolver *todo.TodoResolver
+	HelloResolver *hello_comp.HelloResolver
+	TodoResolver  *todo_comp.TodoResolver
 }
 
 type Resolvers struct {
@@ -27,8 +27,6 @@ func (r *Resolvers) Hello() string {
 	return r.HelloResolver.SayHello()
 }
 
-func (r *Resolvers) AddTodo(args *struct{
-	Todo *todo.TodoItem
-}) *todo.TodoItem {
+func (r *Resolvers) AddTodo(args *struct{ Todo *todo_comp.TodoItem }) *todo_comp.TodoItem {
 	return r.TodoResolver.AddTodo(args.Todo)
 }

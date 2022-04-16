@@ -18,10 +18,9 @@ func Connect() (*gorm.DB, error) {
 	}
 
 	// Setup Auto Migrations
-	db.AutoMigrate(&todo.TodoItem{})
+	db.AutoMigrate(&todo_comp.TodoItem{})
 
 	// TODO add the db host on this log
 	log.Println("Successfully connected to the postgres database...")
 	return db, nil
 }
-
